@@ -30,7 +30,9 @@ export class DateValueAccessor extends BaseValueAccessor<DatePicker> {
     writeValue(value: any): void {
         var normalizedValue = isBlank(value) ? new Date() : value;
         if (!isDate(normalizedValue)) {
-            if (typeof normalizedValue === 'string' || typeof normalizedValue === 'number') {
+            if (typeof normalizedValue === 'string') {
+                normalizedValue = new Date(normalizedValue);
+            } else if (typeof normalizedValue === 'number') {
                 normalizedValue = new Date(normalizedValue);
             }
             if (!isDate(normalizedValue)) {

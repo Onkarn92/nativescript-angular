@@ -45,7 +45,7 @@
 	"devDependencies": {
 		"nativescript-dev-typescript": "^0.3.1",
 		"nativescript-dev-webpack": "0.0.13",
-		"typescript": "^1.8.10"
+		"typescript": "^1.9.0-dev.20160409"
 	},
 	"nativescript": {
 		"id": "org.nativescript.ngsample",

@@ -21,6 +21,7 @@ export class NSLocationStrategy extends LocationStrategy {
 
     constructor() {
         super();
+
         routerLog("NSLocationStrategy.constructor()");
     }
 
@@ -52,12 +53,12 @@ export class NSLocationStrategy extends LocationStrategy {
 
     replaceState(state: any, title: string, url: string, queryParams: string): void {
         routerLog(`NSLocationStrategy.replaceState state: ${state}, title: ${title}, url: ${url}, queryParams: ${queryParams}`);
-        throw new Error("Not implemented");
+        // throw new Error("Not implemented");
     }
 
     forward(): void {
         routerLog("NSLocationStrategy.forward");
-        throw new Error("Not implemented");
+        // throw new Error("Not implemented");
     }
 
     back(): void {

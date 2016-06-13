@@ -7,6 +7,7 @@
 
 // this import should be first in order to load some required settings (like globals and reflect-metadata)
 import { nativeScriptBootstrap } from "nativescript-angular/application";
+import { NS_ROUTER_PROVIDERS as NS_ROUTER_PROVIDERS_DEPRECATED } from "nativescript-angular/router-deprecated";
 import { NS_ROUTER_PROVIDERS } from "nativescript-angular/router";
 import { rendererTraceCategory, routerTraceCategory } from "nativescript-angular/trace";
 
@@ -20,12 +21,17 @@ import {Benchmark} from './performance/benchmark';
 import {ListTest} from './examples/list/list-test';
 import {ListTestAsync} from "./examples/list/list-test-async";
 import {ImageTest} from "./examples/image/image-test";
-import {NavigationTest} from "./examples/navigation/navigation-test";
 import {ActionBarTest} from "./examples/action-bar/action-bar-test";
 import {ModalTest} from "./examples/modal/modal-test";
 import {PlatfromDirectivesTest} from "./examples/platform-directives/platform-directives-test";
-import {RouterOutletTest} from "./examples/navigation/router-outlet-test";
-import {LoginTest} from "./examples/navigation/login-test";
+
+// router-deprecated
+import {NavigationTest} from "./examples/router-deprecated/navigation-test";
+import {RouterOutletTest} from "./examples/router-deprecated/router-outlet-test";
+import {LoginTest} from "./examples/router-deprecated/login-test";
+
+// new router
+import { RouterOutletAppComponent, APP_ROUTER_PROVIDERS} from "./examples/router/router-outlet-test"
 
 //nativeScriptBootstrap(RendererTest);
 //nativeScriptBootstrap(TabViewTest);
@@ -33,10 +39,16 @@ import {LoginTest} from "./examples/navigation/login-test";
 //nativeScriptBootstrap(ListTest);
 //nativeScriptBootstrap(ListTestAsync);
 //nativeScriptBootstrap(ImageTest);
-//nativeScriptBootstrap(NavigationTest, [NS_ROUTER_PROVIDERS]);
-//nativeScriptBootstrap(ActionBarTest, [NS_ROUTER_PROVIDERS], { startPageActionBarHidden: false });
-//nativeScriptBootstrap(ActionBarTest, [NS_ROUTER_PROVIDERS]);
+//nativeScriptBootstrap(ActionBarTest, [NS_ROUTER_PROVIDERS_DEPRECATED], { startPageActionBarHidden: false });
+//nativeScriptBootstrap(ActionBarTest, [NS_ROUTER_PROVIDERS_DEPRECATED]);
 //nativeScriptBootstrap(ModalTest);
 //nativeScriptBootstrap(PlatfromDirectivesTest);
-//nativeScriptBootstrap(RouterOutletTest, [NS_ROUTER_PROVIDERS]);
-nativeScriptBootstrap(LoginTest, [NS_ROUTER_PROVIDERS]);
+
+
+// new router
+nativeScriptBootstrap(RouterOutletAppComponent, [APP_ROUTER_PROVIDERS]);
+
+// router-deprecated
+// nativeScriptBootstrap(NavigationTest, [NS_ROUTER_PROVIDERS_DEPRECATED]);
+//nativeScriptBootstrap(RouterOutletTest, [NS_ROUTER_PROVIDERS_DEPRECATED]);
+// nativeScriptBootstrap(LoginTest, [NS_ROUTER_PROVIDERS_DEPRECATED]);
