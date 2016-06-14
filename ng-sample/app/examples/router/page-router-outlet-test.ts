@@ -56,11 +56,11 @@ class SecondComponent implements OnInit, OnDestroy {
                 <Button text="Second(2)" [nsRouterLink]="['/second', '2' ]"></Button>
             </StackLayout>
             
-            <router-outlet></router-outlet>
+            <page-router-outlet></page-router-outlet>
         </StackLayout>
     `
 })
-export class RouterOutletAppComponent {
+export class PageRouterOutletAppComponent {
 }
 
 
@@ -69,6 +69,6 @@ const routes: RouterConfig = [
     { path: "/second/:id", component: SecondComponent },
 ];
 
-export const RouterOutletRouterProviders = [
+export const PageRouterOutletRouterProviders = [
     nsProvideRouter(routes)
 ];

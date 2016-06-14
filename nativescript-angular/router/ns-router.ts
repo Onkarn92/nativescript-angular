@@ -1,10 +1,11 @@
 import {Type} from '@angular/core/src/facade/lang';
 import {provide, Injectable} from '@angular/core';
 import {LocationStrategy, PlatformLocation, UrlChangeListener} from '@angular/common';
-import { provideRouter, RouterConfig } from '@angular/router';
+import { RouterConfig } from '@angular/router';
+import { provideRouter } from '@angular/router/common_router_providers';
 
 import {NSRouterLink} from './ns-router-link';
-// import {PageRouterOutlet} from './page-router-outlet';
+import {PageRouterOutlet} from './page-router-outlet';
 import {NSLocationStrategy} from './ns-location-strategy';
 import {NativescriptPlatformLocation} from './ns-platform-location';
 import {routerLog} from "../trace";
@@ -21,12 +22,12 @@ export const NS_ROUTER_PROVIDERS: any[] = [
 
 export const NS_ROUTER_DIRECTIVES: Type[] = [
     NSRouterLink,
-    // PageRouterOutlet
+    PageRouterOutlet
 ];
 
 export function nsProvideRouter(config: RouterConfig): any[] {
     return [
-        ...provideRouter(config),
-        ...NS_ROUTER_PROVIDERS
+        ...NS_ROUTER_PROVIDERS,
+        ...provideRouter(config)
     ]
 };

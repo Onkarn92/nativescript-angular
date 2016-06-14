@@ -31,7 +31,8 @@ import {RouterOutletTest} from "./examples/router-deprecated/router-outlet-test"
 import {LoginTest} from "./examples/router-deprecated/login-test";
 
 // new router
-import { RouterOutletAppComponent, APP_ROUTER_PROVIDERS} from "./examples/router/router-outlet-test"
+import { RouterOutletAppComponent, RouterOutletRouterProviders} from "./examples/router/router-outlet-test"
+import { PageRouterOutletAppComponent, PageRouterOutletRouterProviders } from "./examples/router/page-router-outlet-test"
 
 //nativeScriptBootstrap(RendererTest);
 //nativeScriptBootstrap(TabViewTest);
@@ -46,7 +47,8 @@ import { RouterOutletAppComponent, APP_ROUTER_PROVIDERS} from "./examples/router
 
 
 // new router
-nativeScriptBootstrap(RouterOutletAppComponent, [APP_ROUTER_PROVIDERS]);
+// nativeScriptBootstrap(RouterOutletAppComponent, [RouterOutletRouterProviders]);
+nativeScriptBootstrap(PageRouterOutletAppComponent, [PageRouterOutletRouterProviders]);
 
 // router-deprecated
 // nativeScriptBootstrap(NavigationTest, [NS_ROUTER_PROVIDERS_DEPRECATED]);
