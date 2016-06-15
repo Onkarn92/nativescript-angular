@@ -1,4 +1,5 @@
-import {ComponentRef, ViewContainerRef, Component, Type, ViewChild, ComponentResolver, ChangeDetectorRef, Host} from '@angular/core';
+import {ComponentRef, ComponentFactory, ViewContainerRef, Component,
+    Type, ViewChild, ComponentResolver, ChangeDetectorRef, Host} from '@angular/core';
 import trace = require("trace");
 
 type AnyComponentRef = ComponentRef<any>;
@@ -9,7 +10,8 @@ interface PendingLoadEntry {
 
 export const CATEGORY = "detached-loader";
 function log(message: string) {
-    trace.write(message, CATEGORY);
+    // trace.write(message, CATEGORY);
+    console.log("DETACHED-CONTAINER: " + message);
 }
 
 
@@ -22,12 +24,12 @@ function log(message: string) {
     template: `<Placeholder #loader></Placeholder>`
 })
 export class DetachedLoader {
-    @ViewChild('loader', { read: ViewContainerRef }) containerRef: ViewContainerRef;
+    @ViewChild('loader', { read: ViewContainerRef }) childContainerRef: ViewContainerRef;
 
     private viewLoaded = false;
     private pendingLoads: PendingLoadEntry[] = [];
 
-    constructor(private compiler: ComponentResolver, private changeDetector: ChangeDetectorRef) { }
+    constructor(private compiler: ComponentResolver, private changeDetector: ChangeDetectorRef, private containerRef: ViewContainerRef) { }
 
     public ngAfterViewInit() {
         log("DetachedLoader.ngAfterViewInit");
@@ -42,7 +44,7 @@ export class DetachedLoader {
 
     private loadInLocation(componentType: Type): Promise<ComponentRef<any>> {
         return this.compiler.resolveComponent(componentType).then((componentFactory) => {
-            return this.containerRef.createComponent(componentFactory, this.containerRef.length, this.containerRef.parentInjector, null);
+            return this.childContainerRef.createComponent(componentFactory, this.childContainerRef.length, this.childContainerRef.parentInjector, null);
         }).then((compRef) => {
             log("DetachedLoader.loadInLocation component loaded -> markForCheck");
             // Component is created, buit may not be checked if we are loading 
@@ -66,7 +68,7 @@ export class DetachedLoader {
             // so that loading can conitionue.
             log("DetachedLoader.loadComponent -> markForCheck(with setTimeout())")
             setTimeout(() => this.changeDetector.markForCheck(), 0);
-            
+
             return new Promise((resolve, reject) => {
                 this.pendingLoads.push({
                     componentType: componentType,
@@ -74,5 +76,9 @@ export class DetachedLoader {
                 });
             });
         }
+    }
+
+    public loadWithFactory<T>(factory: ComponentFactory<T>): ComponentRef<T> {
+        return this.containerRef.createComponent(factory, this.containerRef.length, this.containerRef.parentInjector, null);
     }
 }

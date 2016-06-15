@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { RouterConfig, ActivatedRoute, ROUTER_DIRECTIVES } from '@angular/router';
-import { Observable } from "rxjs";
 import { NS_ROUTER_DIRECTIVES, nsProvideRouter} from "nativescript-angular/router"
 
 @Component({
@@ -30,7 +29,7 @@ class FirstComponent implements OnInit, OnDestroy {
     </StackLayout>`
 })
 class SecondComponent implements OnInit, OnDestroy {
-    id: Observable<string>;
+    id;
     constructor(route: ActivatedRoute) {
         this.id = route.params.map(r => r["id"]);
     }

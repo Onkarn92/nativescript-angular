@@ -36,11 +36,17 @@ export class NSLocationStrategy extends LocationStrategy {
     }
 
     pushState(state: any, title: string, url: string, queryParams: string): void {
-        routerLog(`NSLocationStrategy.pushState state: ${state}, title: ${title}, url: ${url}, queryParams: ${queryParams}`);
+        // Temporary workaorund because router pushes state even on go back (https://github.com/angular/vladivostok/pull/53)
+        var current = this.peekState();
+        if (current && current.state === state && current.title === title && current.url === url && current.queryParams === queryParams) {
+            routerLog("NSLocationStrategy.pushState() - same state pushed - IGNORE");
+            return;
+        }
 
         let isNewPage = this._isPageNavigatingForward;
-        this._isPageNavigatingForward = false;
+        routerLog(`NSLocationStrategy.pushState state: ${state}, title: ${title}, url: ${url}, queryParams: ${queryParams}, isPageNavigation: ${isNewPage}`);
 
+        this._isPageNavigatingForward = false;
         this.states.push({
             state: state,
             title: title,
