@@ -33,6 +33,7 @@ import {LoginTest} from "./examples/router-deprecated/login-test";
 // new router
 import { RouterOutletAppComponent, RouterOutletRouterProviders} from "./examples/router/router-outlet-test"
 import { PageRouterOutletAppComponent, PageRouterOutletRouterProviders } from "./examples/router/page-router-outlet-test"
+import { PageRouterOutletNestedAppComponent, PageRouterOutletNestedRouterProviders } from "./examples/router/page-router-outlet-nested-test"
 
 //nativeScriptBootstrap(RendererTest);
 //nativeScriptBootstrap(TabViewTest);
@@ -48,7 +49,8 @@ import { PageRouterOutletAppComponent, PageRouterOutletRouterProviders } from ".
 
 // new router
 // nativeScriptBootstrap(RouterOutletAppComponent, [RouterOutletRouterProviders]);
-nativeScriptBootstrap(PageRouterOutletAppComponent, [PageRouterOutletRouterProviders]);
+// nativeScriptBootstrap(PageRouterOutletAppComponent, [PageRouterOutletRouterProviders]);
+nativeScriptBootstrap(PageRouterOutletNestedAppComponent, [PageRouterOutletNestedRouterProviders]);
 
 // router-deprecated
 // nativeScriptBootstrap(NavigationTest, [NS_ROUTER_PROVIDERS_DEPRECATED]);

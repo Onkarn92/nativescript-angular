@@ -10,8 +10,7 @@ interface PendingLoadEntry {
 
 export const CATEGORY = "detached-loader";
 function log(message: string) {
-    // trace.write(message, CATEGORY);
-    console.log("DETACHED-CONTAINER: " + message);
+    trace.write(message, CATEGORY);
 }
 
 

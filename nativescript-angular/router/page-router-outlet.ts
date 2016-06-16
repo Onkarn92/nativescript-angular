@@ -78,12 +78,9 @@ export class PageRouterOutlet extends RouterOutlet {
         private locationStrategy: NSLocationStrategy,
         compiler: ComponentResolver,
         @Inject(DEVICE) device: Device) {
-
         super(parentOutletMap, containerRef, name)
-        console.log("----->>>> PageRouterOutlet.constructor containerRef:" + this.containerRef);
 
         this.viewUtil = new ViewUtil(device);
-
         compiler.resolveComponent(DetachedLoader).then((detachedLoaderFactory) => {
             log("DetachedLoaderFactory leaded");
             this.detachedLoaderFactory = detachedLoaderFactory;
@@ -91,8 +88,6 @@ export class PageRouterOutlet extends RouterOutlet {
     }
 
     deactivate(): void {
-        log("deactivate");
-
         if (this.locationStrategy.isPageNavigatingBack()) {
             log("PageRouterOutlet.deactivate() while going back - should destroy: " + this.currnetActivatedComp.componentType);
             const popedItem = this.refCache.pop();
@@ -125,8 +120,6 @@ export class PageRouterOutlet extends RouterOutlet {
         providers: ResolvedReflectiveProvider[],
         outletMap: RouterOutletMap): void {
 
-        log("activate");
-
         this.outletMap = outletMap;
         this.currentActivatedRoute = activatedRoute;
 
@@ -150,7 +143,7 @@ export class PageRouterOutlet extends RouterOutlet {
             this.refCache.push(this.currnetActivatedComp, null);
 
         } else {
-            routerLog("PageRouterOutlet.activate() forward navigation - create detached loader in the loader container: " + activatedRoute.component);
+            log("PageRouterOutlet.activate() forward navigation - create detached loader in the loader container: " + activatedRoute.component);
 
             const page = new Page();
             const pageResolvedProvider = ReflectiveInjector.resolve([provide(Page, { useValue: page })])
@@ -198,10 +191,9 @@ export class PageRouterOutlet extends RouterOutlet {
     }
 }
 
-function log(method: string, route?: ActivatedRoute) {
-    console.log("======>>>>>> " + method)
-
-    // routerLog("PageRouterOutlet." + method + " isBack: " + this._location.isPageNavigatingBack() + " route: " + route.component);
+function log(msg: string) {
+    console.log("===NAV===>>>>>> " + msg)
+    // routerLog(msg);
 }
 
 

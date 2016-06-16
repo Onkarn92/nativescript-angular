@@ -112,12 +112,7 @@ class ThirdComponent implements OnInit, OnDestroy {
 @Component({
     selector: 'navigation-test',
     directives: [ROUTER_DIRECTIVES, NS_ROUTER_DIRECTIVES],
-    styleUrls: ["examples/router/styles.css"],
-    template: `
-        <StackLayout>
-            <page-router-outlet></page-router-outlet>
-        </StackLayout>
-    `
+    template: `<page-router-outlet></page-router-outlet>`
 })
 export class PageRouterOutletAppComponent {
     constructor(router: Router, private location: Location) {
